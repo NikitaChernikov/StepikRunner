@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,12 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _laneChangeSpeed = 20f;
     [SerializeField] private float _swipeThreshold = 50f;
     [SerializeField] private float _jumpForce = 10f;
-    [SerializeField] private PlayerAnimations _playerAnimations;
 
     [Header("Map Parameters")]
     [SerializeField] private float _middleLaneX = 2.5f;
     [SerializeField] private float _leftLaneX = -2.5f;
     [SerializeField] private float _rightLaneX = 7.5f;
+
+    public static event Action<Animations> OnChangeAnimation;
 
     private Rigidbody _rigidbody;
     private Vector3 _moveDirection;
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _targetX = _middleLaneX;
         }
-        _playerAnimations.ChangeAnim(_playerAnimations.LeftParameter);
+        OnChangeAnimation?.Invoke(Animations.ToLeft);
     }
 
     private void MoveRight()
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _targetX = _middleLaneX;
         }
-        _playerAnimations.ChangeAnim(_playerAnimations.RightParameter);
+        OnChangeAnimation?.Invoke(Animations.ToRight);
     }
 
     private void Jump()
@@ -105,14 +107,13 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _isGrounded = false;
-            _playerAnimations.ChangeAnim(_playerAnimations.JumpStartParameter);
+            OnChangeAnimation?.Invoke(Animations.StartJump);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         _isGrounded = true;
-        _playerAnimations.ChangeAnim(_playerAnimations.JumpEndParameter);
-        _playerAnimations.ResetLaneChangeTriggers();
+        OnChangeAnimation?.Invoke(Animations.StopJump);
     }
 }
