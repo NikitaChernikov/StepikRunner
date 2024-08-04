@@ -27,7 +27,6 @@ public class PlayerLost : MonoBehaviour
     {
         if (collision.collider.CompareTag("Obstacle"))
         {
-            Debug.Log("Hit");
             _playerMovement.enabled = false;
             EnableRagdoll();
             OnDeath?.Invoke(true);
@@ -46,7 +45,8 @@ public class PlayerLost : MonoBehaviour
         {
             collider.isTrigger = false;
         }
-        _ragdollColliders[0].isTrigger = true;
+        _ragdollColliders[0].enabled = false;
+        _ragdollRigidbodies[0].isKinematic = true;
     }
 
     // Отключаем рэгдолл, включая анимацию

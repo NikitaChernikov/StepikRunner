@@ -14,7 +14,7 @@ public class CoinGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitializePool();
     }
 
     private void InitializePool()

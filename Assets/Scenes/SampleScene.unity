@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -258,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000119209275, y: 4.8233244e-13, z: 1.6077745e-13, w: 1}
-  m_LocalPosition: {x: -0.004999995, y: 3.2500014, z: -7.220007}
+  m_LocalPosition: {x: 0, y: 3.25, z: -7}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -308,6 +309,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab78c2739e1c09344a702ed81f4135a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 8843147959038473924}
+  _offset: {x: 0, y: 5, z: -11}
+  _smoothSpeed: 0.125
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _score: 0
+  _coinWorth: 20
 --- !u!4 &718177542
 Transform:
   m_ObjectHideFlags: 0
@@ -616,7 +633,7 @@ MonoBehaviour:
   - {fileID: 817702687439546975, guid: b23767735ee0e1c45a50fb550e2bb361, type: 3}
   - {fileID: 6176135157829104092, guid: 8ef276156521a4345b319c0bac88b7dd, type: 3}
   _poolSize: 2
-  _obstaclesPerChunk: 3
+  _obstaclesPerChunk: 2
 --- !u!4 &128066073508695689
 Transform:
   m_ObjectHideFlags: 0
@@ -3037,6 +3054,8 @@ GameObject:
   - component: {fileID: 7411136076243516064}
   - component: {fileID: 7411136076243516063}
   - component: {fileID: 7411136076243516066}
+  - component: {fileID: 7411136076243516067}
+  - component: {fileID: 7411136076243516068}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3060,7 +3079,6 @@ MonoBehaviour:
   _laneChangeSpeed: 10
   _swipeThreshold: 50
   _jumpForce: 8
-  _playerAnimations: {fileID: 8585859943967728157}
   _middleLaneX: 2.5
   _leftLaneX: -2.5
   _rightLaneX: 7.5
@@ -3127,6 +3145,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8585859943967728156}
+--- !u!114 &7411136076243516067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411136076243516061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81159f9faec4bf46a2da0aba1885337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7411136076243516068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411136076243516061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9723fe19a53a692409b3438761ada8bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _periodToAccelerate: 30
+  _amountOfAcceleration: 5
 --- !u!137 &7530262811406168411
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3768,10 +3812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38eea5e9c9eea7b4088d153407df0a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftParameter: ToLeft
-  RightParameter: ToRight
-  JumpStartParameter: StartJump
-  JumpEndParameter: StopJump
 --- !u!4 &8669398851084043393
 Transform:
   m_ObjectHideFlags: 0

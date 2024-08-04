@@ -13,7 +13,7 @@ public class Chunk : MonoBehaviour
         _obstacleGenerator = FindObjectOfType<ObstacleGenerator>(); // Находим генератор
         _coinGenerator = FindObjectOfType<CoinGenerator>(); // Находим генератор монет
     }
-    private void Start()
+    private void OnEnable()
     {
         _obstacleGenerator.SpawnObstacles(transform); // Генерируем препятствия
         _coinGenerator.SpawnCoins(transform); // Генерируем монеты

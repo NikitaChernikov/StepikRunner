@@ -24,6 +24,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _startTouchPosition;
     private Vector2 _endTouchPosition;
 
+    private void OnEnable()
+    {
+        CharacterAcceleration.OnAccelerate += CharacterAcceleration_OnAccelerate;
+    }
+
+    private void CharacterAcceleration_OnAccelerate(float amount)
+    {
+        _forwardSpeed += amount;
+    }
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
