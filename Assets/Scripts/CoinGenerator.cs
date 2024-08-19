@@ -8,7 +8,7 @@ public class CoinGenerator : MonoBehaviour
     [SerializeField] private float _coinSpacing = 2f; // Расстояние между монетами
 
     private Queue<GameObject> _coinPool = new Queue<GameObject>(); // Пул монет
-    private float[] _lanes = { -1.7f, 2.8f, 7.5f }; // Координаты по оси X для линий
+    private float[] _lanes = { -2.5f, 2.5f, 7.5f }; // Координаты по оси X для линий
     private float _coinHeight = 4.3f; // Высота монеты по оси Y
 
     // Start is called before the first frame update

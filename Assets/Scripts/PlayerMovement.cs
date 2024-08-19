@@ -123,7 +123,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _isGrounded = true;
-        OnChangeAnimation?.Invoke(Animations.StopJump);
+        if (!_isGrounded)
+        {
+            _isGrounded = true;
+            OnChangeAnimation?.Invoke(Animations.StopJump);
+        }
     }
 }

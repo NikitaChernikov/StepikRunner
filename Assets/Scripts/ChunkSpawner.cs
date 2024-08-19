@@ -15,6 +15,8 @@ public class ChunkSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Спавн первого уникального чанка
+        SpawnInitialChunk();
         for (int i = 0; i < _initialChunks; i++)
         {
             SpawnChunk();
@@ -42,8 +44,8 @@ public class ChunkSpawner : MonoBehaviour
         }
         else
         {
-            // Выбор случайного префаба из массива
-            int randomIndex = Random.Range(0, _chunkPrefabs.Length);
+            // Выбор случайного префаба из массива (начиная с индекса 1, чтобы исключить первый чанк)
+            int randomIndex = Random.Range(1, _chunkPrefabs.Length);
             chunk = Instantiate(_chunkPrefabs[randomIndex]);
         }
 
@@ -55,5 +57,13 @@ public class ChunkSpawner : MonoBehaviour
     {
         chunk.SetActive(false);
         _chunkPool.Enqueue(chunk);
+    }
+
+    private void SpawnInitialChunk()
+    {
+        // Спавн первого уникального чанка
+        GameObject initialChunk = Instantiate(_chunkPrefabs[0]);
+        initialChunk.transform.position = new Vector3(0, 0, _spawnZ);
+        _spawnZ += _chunkWidth;
     }
 }
